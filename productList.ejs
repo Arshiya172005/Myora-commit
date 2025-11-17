@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MYORA — Product Catalogue</title>
+  <style>
+    /* ================================================
+   🌿 Myora | Product Catalogue — Signature Design
+   Sleek • Premium • Interactive • Balanced
+   ================================================ */
+
+    :root {
+      --emerald: #014d40;
+      --emerald-light: #02a38a;
+      --accent: #00bfa6;
+      --cream: #f9f6ee;
+      --text-dark: #1b1b1b;
+      --shadow: rgba(0, 0, 0, 0.15);
+      --card-glow: rgba(0, 191, 166, 0.25);
+      --buy-gradient: linear-gradient(135deg, #00bfa6, #00e0b5);
+      --cart-gradient: linear-gradient(135deg, #02735e, #02a38a);
+    }
+
+    /* ---------- Base Layout ---------- */
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(180deg, var(--cream) 0%, #f5fffa 50%, #ffffff 100%);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+      color: #fff;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      font-size: 1.8em;
+      font-weight: 600;
+      letter-spacing: 1.6px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    header h1:hover {
+      transform: scale(1.08);
+      color: var(--accent);
+      text-shadow: 0 0 10px rgba(0, 191, 166, 0.5);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 16px;
+      font-size: 1em;
+      font-weight: 500;
+      position: relative;
+      transition: 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ---------- Category Title ---------- */
+    .category {
+      width: 90%;
+      margin: 80px auto;
+      text-align: left;
+    }
+
+    .category h2 {
+      font-size: 1.9em;
+      color: var(--emerald);
+      border-left: 6px solid var(--accent);
+      padding-left: 14px;
+      margin-bottom: 30px;
+      letter-spacing: 0.7px;
+      font-weight: 600;
+      text-shadow: 0 0 6px rgba(1, 77, 64, 0.1);
+    }
+
+    /* ---------- Product Grid ---------- */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 40px;
+    }
+
+    /* ---------- Product Card ---------- */
+    .card {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      text-align: center;
+      padding: 24px;
+      transition: all 0.5s ease;
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(8px);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, var(--card-glow), transparent 70%);
+      transform: scale(0);
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+
+    .card:hover::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 12px 30px rgba(0, 191, 166, 0.25);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.5s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .card:hover img {
+      transform: scale(1.1) rotateZ(1deg);
+    }
+
+    /* ---------- Product Text ---------- */
+    .card h3 {
+      color: var(--emerald);
+      margin: 16px 0 6px;
+      font-size: 1.3em;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: #333;
+      font-weight: 500;
+      margin: 10px 0;
+      font-size: 1.05em;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-block;
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin: 8px 6px;
+      transition: all 0.35s ease;
+      cursor: pointer;
+      font-size: 0.95em;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.25);
+      transform: skewX(-25deg);
+      transition: left 0.6s ease;
+      z-index: 0;
+    }
+
+    .btn:hover::before {
+      left: 120%;
+    }
+
+    .btn.cart {
+      background: var(--cart-gradient);
+      box-shadow: 0 4px 12px rgba(2, 163, 138, 0.3);
+    }
+
+    .btn.cart:hover {
+      background: linear-gradient(135deg, #02a38a, #00c7a2);
+      transform: translateY(-2px) scale(1.06);
+      box-shadow: 0 8px 20px rgba(2, 163, 138, 0.4);
+    }
+
+    .btn.buy {
+      background: var(--buy-gradient);
+      box-shadow: 0 4px 12px rgba(0, 191, 166, 0.3);
+    }
+
+    .btn.buy:hover {
+      background: linear-gradient(135deg, #00d2b2, #00b49e);
+      transform: translateY(-2px) scale(1.06);
+      box-shadow: 0 8px 20px rgba(0, 191, 166, 0.45);
+    }
+
+    /* ---------- Popup ---------- */
+    .popup {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--accent);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0, 191, 166, 0.4);
+    }
+
+    .popup.show {
+      opacity: 1;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+      color: white;
+      text-align: center;
+      padding: 26px;
+      font-size: 1em;
+      margin-top: 70px;
+      box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      nav a {
+        margin: 0 10px;
+      }
+
+      .products {
+        gap: 25px;
+      }
+
+      .card img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>MYORA</h1>
+    <nav>
+      <a href="/">Home</a>
+
+      <a href="/cart" style="position:relative;">
+        Cart <span id="cartCount" class="cart-badge" style="display:none;">0</span>
+      </a>
+
+    </nav>
+  </header>
+
+  <main style="padding-top:40px;">
+    <section class="category" style="text-align:center; max-width:800px;">
+      <h2 style="border:none; font-size:2em; color:var(--emerald);">Explore Our Collections</h2>
+      <p style="color:#555; margin-top:10px;">
+        Discover premium electronics, fashion, and appliances curated for your modern lifestyle.
+      </p>
+    </section>
+
+    <% const electronics=[ { id: "tv" , name: "LED TV" , image: "tv.jpg" , price: 45000 }, { id: "laptop" ,
+      name: "Laptop" , image: "laptop.jpg" , price: 65000 }, { id: "smartphone" , name: "Smartphone" ,
+      image: "Phone.jpg" , price: 30000 } ]; const fashion=[ { id: "tshirt" , name: "T-Shirt" , image: "tshirt.jpg" ,
+      price: 800 }, { id: "jeans" , name: "Jeans" , image: "jeans.jpg" , price: 1200 }, { id: "shoes" , name: "Shoes" ,
+      image: "shoes.jpg" , price: 2500 } ]; const home=[ { id: "refrigerator" , name: "Refrigerator" ,
+      image: "refrigerator.jpg" , price: 40000 }, { id: "washingmachine" , name: "Washing Machine" ,
+      image: "washingmachine.jpg" , price: 25000 }, { id: "microwave" , name: "Microwave" , image: "microwave.jpg" ,
+      price: 12000 } ]; %>
+
+      <!-- ELECTRONICS -->
+      <section class="category">
+        <h2>Electronics</h2>
+        <div class="products">
+          <% electronics.forEach(item=> { %>
+            <div class="card">
+              <img src="/images/<%= item.image %>" alt="<%= item.name %>">
+              <h3>
+                <%= item.name %>
+              </h3>
+              <p>₹<%= item.price %>
+              </p>
+              <button class="btn add-cart" data-id="<%= item.id %>">Add to Cart</button>
+              <button class="btn buy-now" data-id="<%= item.id %>">Buy Now</button>
+            </div>
+            <% }) %>
+        </div>
+      </section>
+
+      <!-- FASHION -->
+      <section class="category">
+        <h2>Fashion</h2>
+        <div class="products">
+          <% fashion.forEach(item=> { %>
+            <div class="card">
+              <img src="/images/<%= item.image %>" alt="<%= item.name %>">
+              <h3>
+                <%= item.name %>
+              </h3>
+              <p>₹<%= item.price %>
+              </p>
+              <button class="btn add-cart" data-id="<%= item.id %>">Add to Cart</button>
+              <button class="btn buy-now" data-id="<%= item.id %>">Buy Now</button>
+            </div>
+            <% }) %>
+        </div>
+      </section>
+
+      <!-- HOME APPLIANCES -->
+      <section class="category">
+        <h2>Home Appliances</h2>
+        <div class="products">
+          <% home.forEach(item=> { %>
+            <div class="card">
+              <img src="/images/<%= item.image %>" alt="<%= item.name %>">
+              <h3>
+                <%= item.name %>
+              </h3>
+              <p>₹<%= item.price %>
+              </p>
+              <button class="btn add-cart" data-id="<%= item.id %>">Add to Cart</button>
+              <button class="btn buy-now" data-id="<%= item.id %>">Buy Now</button>
+            </div>
+            <% }) %>
+        </div>
+      </section>
+  </main>
+
+  <!-- Popup message -->
+  <div id="popup" class="popup">Product added to cart!</div>
+
+  <footer>
+    &copy; 2025 MYORA. All Rights Reserved.
+
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const addButtons = document.querySelectorAll(".add-cart");
+      const buyButtons = document.querySelectorAll(".buy-now");
+      const popup = document.getElementById("popup");
+      const cartCount = document.getElementById("cartCount");
+
+      // ✅ Function to show popup message
+      function showPopup(message) {
+        popup.textContent = message;
+        popup.classList.add("show");
+        setTimeout(() => popup.classList.remove("show"), 2000);
+      }
+
+      // ✅ Function to update cart badge count
+      async function updateCartCount() {
+        try {
+          const res = await fetch("/cart/count");
+          const data = await res.json();
+          if (data.count >= 0) {
+            cartCount.textContent = data.count;
+            cartCount.style.display = data.count > 0 ? "inline" : "none";
+          }
+        } catch (error) {
+          console.error("Error updating cart count:", error);
+        }
+      }
+
+      // 🛒 Add to Cart
+      addButtons.forEach((button) => {
+        button.addEventListener("click", async () => {
+          const card = button.closest(".card");
+          const product = {
+            id: button.dataset.id,
+            name: card.querySelector("h3").innerText,
+            price: parseInt(card.querySelector("p").innerText.replace("₹", "")),
+            image: card.querySelector("img").getAttribute("src").split("/").pop(),
+          };
+
+          try {
+            const res = await fetch("/cart/add", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(product),
+            });
+
+            // Ensure valid JSON
+            const text = await res.text();
+            let data;
+            try {
+              data = JSON.parse(text);
+            } catch {
+              throw new Error("Invalid JSON response");
+            }
+
+            if (data.success) {
+              showPopup("✅ Product added to cart!");
+              updateCartCount();
+            } else {
+              showPopup("❌ Failed to add item!");
+            }
+          } catch (err) {
+            console.error("Add to cart failed:", err);
+            showPopup("⚠️ Error adding to cart");
+          }
+        });
+      });
+
+      // ⚡ Buy Now
+      buyButtons.forEach((button) => {
+        button.addEventListener("click", async () => {
+          const card = button.closest(".card");
+          const product = {
+            id: button.dataset.id,
+            name: card.querySelector("h3").innerText,
+            price: parseInt(card.querySelector("p").innerText.replace("₹", "")),
+            image: card.querySelector("img").getAttribute("src").split("/").pop(),
+          };
+
+          try {
+            const res = await fetch("/cart/buy-now", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(product),
+            });
+
+            const text = await res.text();
+            let data;
+            try {
+              data = JSON.parse(text);
+            } catch {
+              throw new Error("Invalid JSON response");
+            }
+
+            if (data.success) {
+              window.location.href = "/cart"; // redirect to cart
+            } else {
+              showPopup("❌ Failed to process buy now!");
+            }
+          } catch (err) {
+            console.error("Buy now failed:", err);
+            showPopup("⚠️ Error during Buy Now");
+          }
+        });
+      });
+
+      // ✅ Initial update of cart count on page load
+      updateCartCount();
+    });
+  </script>
+
+
+
+
+  <!-- ✅ Optional popup CSS -->
+  <style>
+    .popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #4caf50;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .popup.show {
+      opacity: 1;
+    }
+
+    .cart-badge {
+      background: crimson;
+      color: white;
+      border-radius: 50%;
+      padding: 3px 8px;
+      font-size: 0.8em;
+      position: absolute;
+      top: -6px;
+      right: -12px;
+    }
+
+    .btn {
+      background-color: var(--emerald, #10b981);
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #059669;
+    }
+  </style>
+</body>
+
+
+</html>
